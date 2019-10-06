@@ -1,0 +1,13 @@
+WITH
+
+	FTable AS (
+	SELECT COUNT(CASE WHEN P.gender = 'F' THEN 1 END) AS 	#female
+	FROM Player P),
+
+	Mtable AS (
+	SELECT COUNT(CASE WHEN P.gender = 'M' THEN 1 END) AS #male
+	FROM Player P)
+	
+
+SELECT *
+FROM Mtable, Ftable;

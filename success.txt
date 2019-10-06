@@ -1,0 +1,20 @@
+WITH 
+
+	FailedQuests AS (
+	SELECT DISTINCT Q.theme
+	FROM Quest Q
+	WHERE Q.succeeded IS NULL),	
+
+	AllQuests AS (
+	SELECT DISTINCT Q.theme
+	FROM Quest Q)
+
+SELECT *
+FROM AllQuests
+
+EXCEPT
+
+SELECT *
+FROM FailedQuests
+
+ORDER BY theme;

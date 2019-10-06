@@ -1,0 +1,6 @@
+SELECT V.login, V.realm, COUNT(*) AS #visit, 
+DECIMAL( ROUND( ((CAST( DAYS( MAX(day))- DAYS( MIN(day)) AS DECIMAL))/CAST( (COUNT(*) - 1) AS DECIMAL)),2),5,2) AS frequency
+FROM Visit V
+GROUP BY V.login, V.realm 
+HAVING COUNT(*) >= 2
+ORDER BY V.login, V.realm; 

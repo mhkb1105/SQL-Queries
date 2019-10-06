@@ -1,0 +1,9 @@
+SELECT login
+    FROM player
+	UNION ALL
+SELECT login
+    FROM player
+	UNION ALL 
+SELECT login
+    FROM player
+ORDER BY login;

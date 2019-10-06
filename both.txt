@@ -1,0 +1,15 @@
+WITH
+	Count As (
+	SELECT A.login,
+	COUNT(CASE WHEN A.gender = 'F' THEN 1 END) AS #female,
+	COUNT(CASE WHEN A.gender = 'M' THEN 1 END) AS #male 	
+	FROM Avatar A
+	GROUP BY A.login)
+
+SELECT DISTINCT P.login, REPLACE(REPLACE(P.gender, 'F', 'female'), 'M', 'male') AS gender,
+	(CASE WHEN GC.#female > 0 AND GC.#male = 0 THEN 'female'
+		WHEN GC.#female = 0 AND GC.#male > 0 THEN 'male'
+		WHEN GC.#female > 0 AND GC.#male > 0 THEN 'both' END) AS avatars
+FROM Count GC, Player P
+WHERE P.login = GC.login
+ORDER BY P.login;

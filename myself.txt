@@ -1,0 +1,4 @@
+SELECT *
+FROM Player 
+WHERE UCASE(name) LIKE UCASE('%' || login || '%')
+ORDER BY login ASC;

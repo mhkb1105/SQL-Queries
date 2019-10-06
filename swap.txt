@@ -1,0 +1,17 @@
+WITH
+
+	Atable AS (
+	SELECT A.login, COUNT(A.login) AS #avatar
+	FROM Avatar A
+	GROUP BY A.login),
+
+	Gtable AS (
+	SELECT DISTINCT P.login, P.name, P.gender
+	FROM Avatar A, Player P
+	WHERE P.gender <> A.gender AND P.login = A.login)
+
+SELECT GT.login, GT.gender, GT.name, AT.#avatar 
+FROM Gtable GT, Atable AT
+WHERE GT.login = AT.login
+ORDER BY GT.login;
+	
